@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".AddLandActivity">
+
+    <RelativeLayout
+        android:id="@+id/add_land_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/button_backward"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="@string/back"
+            android:textSize="32sp"
+            android:textColor="#FFFFFF"
+            android:drawablePadding="9dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:singleLine="true"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="marquee"
+            android:gravity="center_horizontal|center"
+            android:singleLine="true"
+            android:text="@string/title_add_land"
+            android:textColor="#ffffffff"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/context"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/Land_Map"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:clickable="true" />
+
+            <LinearLayout
+                android:id="@+id/land_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/land_title"
+                    android:textSize="18sp"
+                    android:textIsSelectable="true" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/gray"/>
+
+                <EditText
+                    android:id="@+id/edt_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:hint="@string/prompt_land_title"
+                    android:minLines="2"
+                    android:gravity="top"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Land_Detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="@id/land_title">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/land_detail"
+                    android:textSize="18sp"
+                    android:textIsSelectable="true" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/gray"/>
+
+                <EditText
+                    android:id="@+id/edt_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/prompt_land_detail"
+                    android:padding="10dp"
+                    android:minLines="3"
+                    android:gravity="top"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/land_else"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="@id/Land_Detail">
+
+                <LinearLayout
+                    android:id="@+id/land_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/price"
+                        android:textSize="18sp"
+                        android:textIsSelectable="true" />
+
+                    <EditText
+                        android:id="@+id/edt_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:hint="@string/prompt_land_price"
+                        android:singleLine="true"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/gray"/>
+
+                <LinearLayout
+                    android:id="@+id/land_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/area"
+                        android:textSize="18sp"
+                        android:textIsSelectable="true" />
+
+                    <EditText
+                        android:id="@+id/edt_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:background="@null"
+                        android:inputType="datetime"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:hint="@string/prompt_land_area"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/check"
+        android:text="@string/goto_add"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/context"/>
+</LinearLayout>

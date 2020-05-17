@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <ScrollView
+        android:id="@+id/context"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="#fff">
+
+                <ImageButton
+                    android:id="@+id/button_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:drawablePadding="9dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/photo"
+                    android:layout_marginStart="175dp"
+                    android:layout_marginEnd="175dp"
+                    android:layout_marginTop="175dp"
+                    android:layout_marginBottom="175dp" />
+
+                <ImageView
+                    android:id="@+id/good_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:padding="1dp"
+                    android:scaleType="fitXY" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/good_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/goods_title"
+                    android:textSize="18sp"
+                    android:textIsSelectable="true" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/gray"/>
+
+                <EditText
+                    android:id="@+id/edt_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:hint="@string/prompt_goods_title"
+                    android:minLines="2"
+                    android:gravity="top"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/good_Detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="@id/good_title">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/goods_detail"
+                    android:textSize="18sp"
+                    android:textIsSelectable="true" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/gray"/>
+
+                <EditText
+                    android:id="@+id/edt_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/prompt_goods_detail"
+                    android:padding="10dp"
+                    android:minLines="3"
+                    android:gravity="top"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/good_else"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="@id/good_Detail">
+
+                <LinearLayout
+                    android:id="@+id/good_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/price"
+                        android:textSize="18sp"
+                        android:textIsSelectable="true" />
+
+                    <EditText
+                        android:id="@+id/edt_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:layout_gravity="end"
+                        android:background="@null"
+                        android:hint="@string/prompt_goods_price"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/land_period"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/sort"
+                        android:textSize="18sp"
+                        android:textIsSelectable="true" />
+
+                    <Spinner
+                        android:id="@+id/edt_sort"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/check"
+        android:text="@string/goto_add"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/context"/>
+
+</LinearLayout>

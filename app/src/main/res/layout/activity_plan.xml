@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PlanActivity">
+    <RelativeLayout
+        android:id="@+id/add_land_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/button_backward"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="@string/back"
+            android:textSize="32sp"
+            android:textColor="#FFFFFF"
+            android:drawablePadding="9dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:singleLine="true"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="marquee"
+            android:gravity="center_horizontal|center"
+            android:singleLine="true"
+            android:text="@string/title_plan"
+            android:textColor="#ffffffff"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+    <Switch
+        android:id="@+id/fertilizer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@android:color/white"
+        android:text="@string/fertilizer"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp" />
+
+    <Switch
+        android:id="@+id/pest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@android:color/white"
+        android:text="@string/pest"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp" />
+
+    <Switch
+        android:id="@+id/ill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@android:color/white"
+        android:text="@string/ill"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/plan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/check"
+        android:text="@string/goto_plan"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+</LinearLayout>
