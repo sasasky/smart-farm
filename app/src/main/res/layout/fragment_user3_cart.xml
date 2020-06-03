@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="全选"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:layout_gravity="center_vertical"/>
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:text="总结："
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="@color/colorPrimary"/>
 
         <TextView
@@ -53,7 +53,7 @@
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:text="0.00"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="@color/colorPrimary"/>
 
         <Button

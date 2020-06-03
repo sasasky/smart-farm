@@ -1,15 +1,10 @@
 package com.example.myapplication.Adapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,10 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.ChangeLandActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.entity.land;
-import com.hb.dialog.myDialog.MyAlertDialog;
+
 public class User2LandAdapter extends RecyclerView.Adapter<User2LandAdapter.MyViewHolder> {
 
     private LayoutInflater mLayoutInflater;
@@ -43,10 +37,9 @@ public class User2LandAdapter extends RecyclerView.Adapter<User2LandAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int i) {
         land land = landList.get(i);
-        myViewHolder.Land_Pic.setImageURI(land.getphotoUrl());
+        myViewHolder.Land_Pic.setImageBitmap(land.getphotoUrl());
         myViewHolder.Land_Name.setText(land.getlocation());
-        myViewHolder.Land_Detail.setText(land.getbrief());
-        myViewHolder.Land_price.setText((int) land.getrent());
+        myViewHolder.Land_price.setText(land.getrent()+" ");
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +60,6 @@ public class User2LandAdapter extends RecyclerView.Adapter<User2LandAdapter.MyVi
     static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView Land_Pic;
         TextView Land_Name;
-        TextView Land_Detail;
         TextView Land_price;
         Button detail;
 
@@ -75,7 +67,6 @@ public class User2LandAdapter extends RecyclerView.Adapter<User2LandAdapter.MyVi
             super(itemView);
             Land_Pic = itemView.findViewById(R.id.Land_Pic);
             Land_Name = itemView.findViewById(R.id.Land_Name);
-            Land_Detail = itemView.findViewById(R.id.Land_Detail);
             Land_price = itemView.findViewById(R.id.Land_price);
             detail = itemView.findViewById(R.id.detail);
         }

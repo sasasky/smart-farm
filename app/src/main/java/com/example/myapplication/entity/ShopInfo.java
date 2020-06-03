@@ -1,63 +1,104 @@
 package com.example.myapplication.entity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.StrictMode;
+import android.util.Base64;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class ShopInfo
 {
-    public String mName;
-    public int mPrice;
-    public int mNumber;
-    public int mDrawable;
+    public int productId;
+    public String type;
+    public double price;
+    public double quantity;
+    public String photoUrl;
     public boolean isCheck;
 
-    public ShopInfo(String mName, int mPrice, int mNumber, int mDrawable, boolean isCheck)
+    public ShopInfo(int productId, String type, double price, double quantity, String photoUrl, boolean isCheck)
     {
-        this.mName=mName;
-        this.mPrice=mPrice;
-        this.mNumber=mNumber;
-        this.mDrawable=mDrawable;
+        this.productId=productId;
+        this.type=type;
+        this.price=price;
+        this.quantity=quantity;
+        this.photoUrl=photoUrl;
         this.isCheck=isCheck;
     }
 
     public ShopInfo() {
     }
 
+    public int getProductId()
+    {
+        return productId;
+    }
+
+    public void setProductId(int productId)
+    {
+        this.productId = productId;
+    }
+
     public String getName()
     {
-        return mName;
+        return type;
     }
 
-    public void setName(String mName)
+    public void setName(String type)
     {
-        this.mName = mName;
+        this.type = type;
     }
 
-    public int getPrice()
+    public double getPrice()
     {
-        return mPrice;
+        return price;
     }
 
-    public void setPrice(int mPrice)
+    public void setPrice(double price)
     {
-        this.mPrice = mPrice;
+        this.price = price;
     }
 
-    public int getNumber()
+    public double getNumber()
     {
-        return mNumber;
+        return quantity;
     }
 
-    public void setNumber(int mNumber)
+    public void setNumber(double quantity)
     {
-        this.mNumber = mNumber;
+        this.quantity = quantity;
     }
 
-    public int getDrawable()
+    public Bitmap getDrawable()
     {
-        return mDrawable;
+        Bitmap bitmap = null;
+        StrictMode.setThreadPolicy(new
+                StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
+        StrictMode.setVmPolicy(
+                new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
+        try{
+            URL url = new URL(photoUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(5000);
+            conn.setRequestMethod("GET");
+            if (conn.getResponseCode() == 200) {
+                InputStream inputStream = conn.getInputStream();
+                bitmap = BitmapFactory.decodeStream(inputStream);
+                return bitmap;
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 
-    public void setDrawable(int mDrawable)
+    public void setDrawable(String photoUrl)
     {
-        this.mDrawable = mDrawable;
+        this.photoUrl = photoUrl;
     }
 
     public boolean getCheck()

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GoodActivity">
+    <RelativeLayout
+        android:id="@+id/add_land_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/button_backward"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="@string/back"
+            android:textSize="32sp"
+            android:textColor="#FFFFFF"
+            android:drawablePadding="9dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:singleLine="true"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="marquee"
+            android:gravity="center_horizontal|center"
+            android:singleLine="true"
+            android:text="@string/title_good"
+            android:textColor="#ffffffff"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/context"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/good_pic"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/Good_Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textIsSelectable="true"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/Good_Price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    android:text="价格"
+                    android:textColor="@color/colorPrimaryDark"/>
+
+                <TextView
+                    android:id="@+id/Good_Num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:layout_gravity="end"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    android:text="面积"
+                    android:textColor="@color/colorPrimaryDark"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/gray"/>
+
+            <TextView
+                android:id="@+id/Good_Detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textIsSelectable="true"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="0"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/check"
+            android:text="取消运输给自己"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/context"/>
+
+        <Button
+            android:id="@+id/self"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="center"
+            android:background="@drawable/check"
+            android:text="下单"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/context"/>
+    </LinearLayout>
+</LinearLayout>

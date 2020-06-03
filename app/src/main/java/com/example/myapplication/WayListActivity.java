@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.myapplication.Adapter.User3WayListAdapter;
-import com.example.myapplication.entity.list;
+import com.example.myapplication.entity.order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +36,9 @@ public class WayListActivity extends AppCompatActivity {
             }
         });
         RecyclerView rv = findViewById(R.id.recyclerView);
-        List<list> listList = new ArrayList();
-        listList.add(new list("2020-02-20","待发货","新鲜玉米 甜玉米 爆浆玉米 8斤装","￥8000.00","x2","16000.00",R.drawable.carrot));
-        User3WayListAdapter mAdapter=new User3WayListAdapter(listList);
+        List<order> listOrder = new ArrayList();
+//        listOrder.add(new order("2020-02-20","待发货","新鲜玉米 甜玉米 爆浆玉米 8斤装","￥8000.00","x2","16000.00",R.drawable.carrot));
+        User3WayListAdapter mAdapter=new User3WayListAdapter(listOrder);
         mAdapter.setOnItemClickListener(new User3WayListAdapter.OnItemClickListener() {
             @Override
             public void onClick(int position) {

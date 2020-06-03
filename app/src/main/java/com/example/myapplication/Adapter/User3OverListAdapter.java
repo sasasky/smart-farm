@@ -11,19 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.entity.list;
+import com.example.myapplication.entity.order;
 
 import java.util.List;
 
 public class User3OverListAdapter extends RecyclerView.Adapter<User3OverListAdapter.MyViewHolder> {
 
     private LayoutInflater mLayoutInflater;
-    private List<list> listList;
+    private List<order> listOrder;
 
     private User3OverListAdapter.OnItemClickListener mOnItemClickListener;
 
-    public User3OverListAdapter(List<list> listList) {
-        this.listList = listList;
+    public User3OverListAdapter(List<order> listOrder) {
+        this.listOrder = listOrder;
     }
     @NonNull
     @Override
@@ -36,50 +36,32 @@ public class User3OverListAdapter extends RecyclerView.Adapter<User3OverListAdap
 
     @Override
     public void onBindViewHolder(@NonNull final User3OverListAdapter.MyViewHolder myViewHolder, final int i) {
-        list list = listList.get(i);
-        myViewHolder.Pic.setImageResource(list.getDrawable());
-        myViewHolder.Name.setText(list.getName());
-        myViewHolder.Num.setText(list.getNum());
-        myViewHolder.price.setText(list.getPrice());
-        myViewHolder.Time.setText(list.getTime());
-        myViewHolder.State.setText(list.getState());
-        myViewHolder.Sum.setText(list.getSum());
-        myViewHolder.logistics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mItemInnerDeleteListener.onItemInnerDeleteClick(i);
-            }
-        });
+        order order = listOrder.get(i);
+        myViewHolder.Time.setText(order.getTime());
+        myViewHolder.State.setText((int) order.getTotal());
+        myViewHolder.Sum.setText(order.getTotal()+"");
     }
 
     @Override
     public int getItemCount() {
-        return listList.size();
+        return listOrder.size();
     }
 
     //定义视图管理器
     static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView Pic;
         TextView Name;
-        TextView Num;
-        TextView price;
         TextView Time;
         TextView State;
         TextView Sum;
-        Button logistics;
-        Button confirm;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             Pic = itemView.findViewById(R.id.pic);
             Name = itemView.findViewById(R.id.title);
-            Num = itemView.findViewById(R.id.num);
-            price = itemView.findViewById(R.id.price);
             Time = itemView.findViewById(R.id.time);
             State = itemView.findViewById(R.id.state);
             Sum = itemView.findViewById(R.id.sum);
-            logistics = itemView.findViewById(R.id.logistics);
-            confirm = itemView.findViewById(R.id.confirm);
         }
     }
 

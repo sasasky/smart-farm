@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".User1MainActivity">
+    tools:context=".User1MainActivity"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/land_titlebar"
@@ -19,6 +20,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
         <TextView
+            android:id="@+id/button_setting"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="@string/setting"
+            android:textSize="32sp"
+            android:textColor="#FFFFFF"
+            android:drawablePadding="9dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:singleLine="true"
+            android:visibility="visible" />
+        <TextView
             android:id="@+id/text_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -28,13 +42,14 @@
             android:text="@string/title_activity_land"
             android:textColor="#ffffffff"
             android:textSize="20dp" />
-
     </RelativeLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:srlEnableFooterFollowWhenLoadFinished="true"
+        app:srlEnableScrollContentWhenLoaded="true">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
@@ -48,12 +63,13 @@
             android:paddingBottom="15dp"
             android:scrollbarStyle="outsideOverlay"
             android:layout_marginStart="0dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add"
         android:layout_marginBottom="24dp"
@@ -80,4 +96,4 @@
         app:rippleColor="#cccccc"
         tools:ignore="MissingConstraints" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

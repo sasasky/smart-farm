@@ -7,66 +7,22 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@color/bg_grey">
-
-    <LinearLayout
-        android:id="@+id/search"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smart"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="10dp">
-        <TextView
-            android:id="@+id/button_search"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:text="@string/search"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:singleLine="true"
-            android:visibility="visible" />
-
-        <EditText
-            android:id="@+id/et_search"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:background="@color/transparent"
-            android:inputType="text"
-            android:hint="请输入姓名或学号"
-            android:imeOptions="actionSearch"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:id="@+id/tv_cancel"
-            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:layout_marginRight="10dp"
-            android:paddingLeft="8dp"
-            android:text="取消"
-            android:textSize="16sp"/>
-    </LinearLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray"/>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            app:tabIndicatorColor="@color/green"
-            app:tabMode="fixed"
-            app:tabGravity="fill"
-            app:tabSelectedTextColor="@color/green"
-            app:tabTextColor="@color/gray">
-        </com.google.android.material.tabs.TabLayout>
-    </androidx.viewpager.widget.ViewPager>
+            android:scrollbars="vertical"
+            android:divider="@null"
+            android:dividerHeight="5dp"
+            android:paddingEnd="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:layout_marginTop="5dp"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

@@ -36,6 +36,22 @@
             android:text="@string/title_address_change"
             android:textColor="#ffffffff"
             android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/button_delete"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:drawablePadding="9dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:singleLine="true"
+            android:text="@string/delete"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:visibility="visible"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
     <LinearLayout
@@ -101,6 +117,30 @@
 
         <EditText
             android:id="@+id/edit_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginStart="5dp"
+            android:background="@null" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/postcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:text="邮编"
+            android:textIsSelectable="true"/>
+
+        <EditText
+            android:id="@+id/edit_postcode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"

@@ -36,10 +36,9 @@ public class User2GoodAdapter extends RecyclerView.Adapter<User2GoodAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull final User2GoodAdapter.MyViewHolder myViewHolder, final int i) {
         goods good = goodsList.get(i);
-        myViewHolder.Pic.setImageResource(good.getDrawable());
-        myViewHolder.Name.setText(good.getName());
-        myViewHolder.People.setText(good.getPeople());
-        myViewHolder.price.setText(good.getPrice());
+        myViewHolder.Pic.setImageBitmap(good.getphotoUrl());
+        myViewHolder.Name.setText(good.gettype());
+        myViewHolder.price.setText(good.getprice()+"");
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +65,6 @@ public class User2GoodAdapter extends RecyclerView.Adapter<User2GoodAdapter.MyVi
     static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView Pic;
         TextView Name;
-        TextView People;
         TextView price;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -74,7 +72,6 @@ public class User2GoodAdapter extends RecyclerView.Adapter<User2GoodAdapter.MyVi
             Pic = itemView.findViewById(R.id.Good_pic);
             Name = itemView.findViewById(R.id.Good_name);
             price = itemView.findViewById(R.id.Good_price);
-            People = itemView.findViewById(R.id.Good_people);
         }
     }
 

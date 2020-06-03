@@ -6,6 +6,7 @@
     <string name="title_add_land">发布土地</string>
     <string name="title_change_land">土地详情修改</string>
     <string name="title_change_good">产品详情修改</string>
+    <string name="title_order">订单详情</string>
     <string name="title_good">产品详情</string>
     <string name="title_activity_user2_main">租地</string>
     <string name="title_plan">种植方案修改</string>
@@ -17,6 +18,13 @@
     <string name="title_overList">待收货订单</string>
     <string name="title_my">我的地址信息</string>
     <string name="title_search">搜索</string>
+    <string name="title_setting">修改个人信息</string>
+    <string name="title_check">审核土地</string>
+    <string name="title_report">处理举报信息</string>
+    <string name="title_select">选择地址信息</string>
+    <string name="title_create">创建订单</string>
+    <string name="title_lease">未支付租用订单</string>
+    <string name="title_self">运输给自己订单</string>
     <string name="prompt_name">请输入用户名</string>
     <string name="prompt_phone">请输入手机号</string>
     <string name="prompt_password">请输入密码</string>
@@ -27,7 +35,7 @@
     <string name="prompt_goods_detail">在这里详细描述一下商品具体情况</string>
     <string name="prompt_land_price">请输入土地价格</string>
     <string name="prompt_goods_price">请输入商品价格</string>
-    <string name="prompt_goods_sort">请选择商品类别</string>
+    <string name="prompt_goods_num">请选择农产品重量</string>
     <string name="prompt_land_area">请输入土地面积</string>
     <string name="action_sign_in">登录</string>
     <string name="action_sign_up">注册</string>
@@ -40,6 +48,9 @@
     <string name="action_pay">结算</string>
     <string name="action_add_cart">加入购物车</string>
     <string name="action_pay_now">立即购买</string>
+    <string name="action_check">审核</string>
+    <string name="action_report">处理举报信息</string>
+    <string name="action_admin">管理员登录</string>
     <string name="user1">农场主</string>
     <string name="user2">租用土地会员</string>
     <string name="user3">农产品买家</string>
@@ -47,6 +58,7 @@
     <string name="goto_change">确定修改</string>
     <string name="goto_delete">删除商品</string>
     <string name="goto_add">确定发布</string>
+    <string name="goto_create">确定下单</string>
     <string name="goto_add_address">确定添加地址</string>
     <string name="goto_plan">确定更改种植方案</string>
     <string name="welcome">"Welcome !"</string>
@@ -56,6 +68,7 @@
     <string name="land_img">土地图片</string>
     <string name="price">价格：</string>
     <string name="area">面积：</string>
+    <string name="num">重量：</string>
     <string name="detail">简介：</string>
     <string name="plant">可种植作物</string>
     <string name="plant_data">作物种植情况</string>
@@ -101,11 +114,6 @@
     <string name="way">&#xe6c1;</string>
     <string name="over">&#xe634;</string>
     <string name="delete">&#xe605;</string>
-    <string-array name="sort">
-        <item>蔬菜</item>
-        <item>水果</item>
-        <item>其他</item>
-    </string-array>
-
-    复制代码
+    <string name="report1">&#xe6af;</string>
+    <string name="report2">&#xe711;</string>
 </resources>

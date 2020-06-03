@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".LandDetailActivity">
 
@@ -37,6 +37,22 @@
             android:text="@string/land_detail"
             android:textColor="#ffffffff"
             android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/button_report"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:drawablePadding="9dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:singleLine="true"
+            android:text="@string/report1"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:visibility="visible"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
     <ScrollView
@@ -60,202 +76,38 @@
                 android:id="@+id/Land_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingLeft="10dp"
+                android:padding="10dp"
                 android:textIsSelectable="true"
-                android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="@id/Land_Map" />
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="@id/Land_Pic" />
 
             <TextView
-                android:id="@+id/Land_Locate"
+                android:id="@+id/Land_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="@id/Land_Name"
+                android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                android:textSize="18sp"
-                android:textIsSelectable="true"/>
+                android:paddingBottom="10dp"
+                android:textIsSelectable="true"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryDark"/>
 
-            <LinearLayout
-                android:id="@+id/Data"
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/card"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/gray"/>
+
+            <TextView
+                android:id="@+id/Land_Detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:padding="10dp"
-                app:layout_constraintTop_toTopOf="@id/Land_Locate">
-
-                <TextView
-                    android:id="@+id/Land_Data"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textIsSelectable="true"
-                    android:textColor="@color/green"
-                    android:text="@string/data"
-                    android:textSize="18sp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintStart_toStartOf="@id/Land_Price"
-                    android:layout_marginLeft="8dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintTop_toTopOf="@id/Land_Data">
-                    <RelativeLayout
-                        android:id="@+id/data1"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/text1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="@string/water"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="3dp"
-                            android:gravity="center"/>
-                        <TextView
-                            android:id="@+id/water"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="5%"
-                            android:layout_above="@+id/text1"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center"/>
-                        <ImageView
-                            android:id="@+id/pic1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/water"
-                            android:contentDescription="water"
-                            android:layout_above="@+id/water"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/data2"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/text2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="@string/warm"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="3dp"
-                            android:gravity="center"/>
-                        <TextView
-                            android:id="@+id/warm"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="20.8℃"
-                            android:layout_above="@+id/text2"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center"/>
-                        <ImageView
-                            android:id="@+id/pic2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/warm"
-                            android:contentDescription="warm"
-                            android:layout_above="@+id/warm"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/data3"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/text3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="@string/CO2"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="3dp"
-                            android:gravity="center"/>
-                        <TextView
-                            android:id="@+id/CO2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="474ppm"
-                            android:layout_above="@+id/text3"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center"/>
-                        <ImageView
-                            android:id="@+id/pic3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/co2"
-                            android:contentDescription="CO2"
-                            android:layout_above="@+id/CO2"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/data4"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/text4"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="@string/light"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="3dp"
-                            android:gravity="center"/>
-                        <TextView
-                            android:id="@+id/light"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:text="0lux"
-                            android:layout_above="@+id/text4"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center"/>
-                        <ImageView
-                            android:id="@+id/pic4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/light"
-                            android:contentDescription="light"
-                            android:layout_above="@+id/light"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center"/>
-                    </RelativeLayout>
-                </LinearLayout>
-
-
-            </LinearLayout>
+                android:textIsSelectable="true"
+                android:textSize="16sp"/>
         </LinearLayout>
     </ScrollView>
 
@@ -263,69 +115,37 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
+        android:layout_gravity="bottom"
         android:orientation="horizontal">
-        <RelativeLayout
-            android:id="@+id/Else"
+        <LinearLayout
+            android:id="@+id/Price"
             android:layout_weight="1"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp">
-            <LinearLayout
-                android:id="@+id/Price"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/Land_Price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/Land_Price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/price"
-                    android:textColor="@color/gray"
-                    android:textSize="18sp"
-                    android:textIsSelectable="true"/>
+                android:text="@string/price"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                android:textIsSelectable="true"/>
 
-                <TextView
-                    android:id="@+id/Land_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textIsSelectable="true"
-                    android:textColor="@color/green"
-                    android:textSize="18sp"
-                    android:layout_marginStart="6dp"
-                    app:layout_constraintStart_toStartOf="@id/Land_Price"
-                    android:layout_marginLeft="6dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/Area"
+            <TextView
+                android:id="@+id/Land_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/Price"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/Land_Area"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/area"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp"
-                    android:textIsSelectable="true"/>
-
-                <TextView
-                    android:id="@+id/Land_area"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textIsSelectable="true"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp"
-                    android:layout_marginStart="6dp"
-                    app:layout_constraintStart_toStartOf="@id/Land_Area"
-                    android:layout_marginLeft="6dp" />
-            </LinearLayout>
-        </RelativeLayout>
+                android:textIsSelectable="true"
+                android:textColor="@color/green"
+                android:textSize="20sp"
+                android:layout_marginStart="6dp"
+                app:layout_constraintStart_toStartOf="@id/Land_Price"
+                android:layout_marginLeft="6dp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/pay"

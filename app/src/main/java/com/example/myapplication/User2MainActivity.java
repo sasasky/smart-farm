@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class User2MainActivity extends FragmentActivity implements View.OnClickL
     private GoodsFragment fg4;
     private ListsFragment fg5;
     private FragmentManager fragmentManager;
+    private String userId;
     //实例化
     private void initView(){
         bottom_bar_text_1=findViewById(R.id.bottom_bar_text_1);
@@ -64,6 +66,8 @@ public class User2MainActivity extends FragmentActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent i = getIntent();
+        userId = i.getStringExtra("userId");
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_user2_main);
         fragmentManager = getSupportFragmentManager();
@@ -79,6 +83,16 @@ public class User2MainActivity extends FragmentActivity implements View.OnClickL
         bottom_bar_3_btn.setOnClickListener(this);
         bottom_bar_4_btn.setOnClickListener(this);
         bottom_bar_5_btn.setOnClickListener(this);
+        TextView setting =findViewById(R.id.button_setting);
+        setting.setTypeface(font);
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it=new Intent(User2MainActivity.this, SettingActivity.class);//启动MainActivity
+                it.putExtra("userId",userId);
+                startActivity(it);
+            }
+        });
         setSelectStatus(0);
     }
 
@@ -103,6 +117,9 @@ public class User2MainActivity extends FragmentActivity implements View.OnClickL
                 tv_main_title.setText("租地");
                 if (fg1 == null) {
                     fg1 = new User1MainFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("userId",userId);
+                    fg1.setArguments(bundle);
                     fragmentTransaction.add(R.id.content, fg1);
                 } else {
                     fragmentTransaction.show(fg1);
@@ -126,6 +143,9 @@ public class User2MainActivity extends FragmentActivity implements View.OnClickL
                 tv_main_title.setText("我的土地");
                 if (fg3 == null) {
                     fg3 = new User1MyFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("userId",userId);
+                    fg3.setArguments(bundle);
                     fragmentTransaction.add(R.id.content, fg3);
                 } else {
                     fragmentTransaction.show(fg3);
@@ -149,6 +169,9 @@ public class User2MainActivity extends FragmentActivity implements View.OnClickL
                 tv_main_title.setText("发布农产品");
                 if (fg2 == null) {
                     fg2 = new AddFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("userId",userId);
+                    fg2.setArguments(bundle);
                     fragmentTransaction.add(R.id.content, fg2);
                 } else {
                     fragmentTransaction.show(fg2);
@@ -172,6 +195,9 @@ public class User2MainActivity extends FragmentActivity implements View.OnClickL
                 tv_main_title.setText("我的商品");
                 if (fg4 == null) {
                     fg4 = new GoodsFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("userId",userId);
+                    fg4.setArguments(bundle);
                     fragmentTransaction.add(R.id.content, fg4);
                 } else {
                     fragmentTransaction.show(fg4);
@@ -195,6 +221,9 @@ public class User2MainActivity extends FragmentActivity implements View.OnClickL
                 tv_main_title.setText("我的订单");
                 if (fg5 == null) {
                     fg5 = new ListsFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("userId",userId);
+                    fg5.setArguments(bundle);
                     fragmentTransaction.add(R.id.content, fg5);
                 } else {
                     fragmentTransaction.show(fg5);

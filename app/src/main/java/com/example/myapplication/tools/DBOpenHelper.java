@@ -50,7 +50,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             String phone = cursor.getString(cursor.getColumnIndex("phone"));
             String password = cursor.getString(cursor.getColumnIndex("password"));
             int id = cursor.getInt(cursor.getColumnIndex("id"));
-            //list.add(new User(name,phone,password,id));
+            //order.add(new User(name,phone,password,id));
         }
         return list;
     }

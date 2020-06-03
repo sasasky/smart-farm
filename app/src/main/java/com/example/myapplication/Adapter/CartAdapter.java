@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,11 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 import com.example.myapplication.entity.ShopInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
     private LayoutInflater mLayoutInflater;
     private List<ShopInfo> mInfos;
+    private List<Boolean> booleanlist=new ArrayList<>();
     private Context mContext;
     private View.OnClickListener mOnClickListener;
     private OnItemClickListener listener;
@@ -29,8 +32,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     public CartAdapter(List<ShopInfo> infos, Context context) {
         mContext = context;
         mInfos = infos;
-        mChangeListener = (CompoundButton.OnCheckedChangeListener) mContext;
-        mOnClickListener = (View.OnClickListener) mContext;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         void onItemClick(View v, int position);
     }
 
-    public void setOnItemClickListener(CartAdapter.OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -67,10 +68,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull final CartAdapter.MyViewHolder myViewHolder, final int i) {
         ShopInfo shopInfo = mInfos.get(i);
-        myViewHolder.mTextViewInfo.setText(mInfos.get(i).mName);
-        myViewHolder.mTextViewPrice.setText(mInfos.get(i).mPrice+ "");
-        myViewHolder.mTextViewCount.setText(mInfos.get(i).mNumber + "");
-        myViewHolder.mImageViewIcon.setImageResource(mInfos.get(i).mDrawable);
+        myViewHolder.mTextViewInfo.setText(shopInfo.getName());
+        myViewHolder.mTextViewPrice.setText("￥"+shopInfo.getPrice());
+        myViewHolder.mTextViewCount.setText(shopInfo.getNumber() + "");
+        myViewHolder.mImageViewIcon.setImageBitmap(shopInfo.getDrawable());
         //设置CheckBox的选中状态
         myViewHolder.mCheckBox.setChecked(mInfos.get(i).isCheck);
         myViewHolder.mCheckBox.setOnCheckedChangeListener(mChangeListener);
@@ -80,18 +81,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 if (listener != null) {
                     listener.onItemClick(v, i);
                 }
-
             }
         });
-        myViewHolder.mButtonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listener.onItemClick(v, i);
-                }
-            }
-        });
-        myViewHolder.mButtonSub.setOnClickListener(new View.OnClickListener() {
+        myViewHolder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
@@ -106,7 +98,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         private TextView mTextViewInfo, mTextViewCount, mTextViewPrice;
         private ImageView mImageViewIcon;
         private CheckBox mCheckBox;
-        private Button mButtonAdd, mButtonSub;
+        private ImageButton delete;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -115,20 +107,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             mTextViewPrice = (TextView) itemView.findViewById(R.id.tv_item_price);
             mImageViewIcon = (ImageView) itemView.findViewById(R.id.pic);
             mCheckBox = (CheckBox) itemView.findViewById(R.id.cb_item_check);
-            mButtonAdd = (Button) itemView.findViewById(R.id.bt_item_add);
-            mButtonSub = (Button) itemView.findViewById(R.id.bt_item_subtract);
+            delete = itemView.findViewById(R.id.delete);
         }
     }
 
-    public int getMoney() {
-        int money = 0;
+    public double getMoney() {
+        double money = 0;
         if (mInfos == null || mInfos.size() == 0) {
             return money;
         }
         for (int i = 0; i < mInfos.size(); i++) {
             ShopInfo info = mInfos.get(i);
             if (info.isCheck) {
-                int itemMoney = info.mNumber * info.mPrice;
+                double itemMoney = info.getPrice();
                 money += itemMoney;
             }
         }

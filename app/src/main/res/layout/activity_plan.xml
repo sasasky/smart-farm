@@ -39,32 +39,32 @@
     </RelativeLayout>
 
     <Switch
-        android:id="@+id/fertilizer"
+        android:id="@+id/water"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="@android:color/white"
-        android:text="@string/fertilizer"
+        android:text="灌溉"
         android:textSize="18sp"
         android:layout_marginTop="10dp" />
 
     <Switch
-        android:id="@+id/pest"
+        android:id="@+id/CO2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="@android:color/white"
-        android:text="@string/pest"
+        android:text="输送二氧化碳"
         android:textSize="18sp"
         android:layout_marginTop="10dp" />
 
     <Switch
-        android:id="@+id/ill"
+        android:id="@+id/light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="@android:color/white"
-        android:text="@string/ill"
+        android:text="增加光照"
         android:textSize="18sp"
         android:layout_marginTop="10dp" />
 

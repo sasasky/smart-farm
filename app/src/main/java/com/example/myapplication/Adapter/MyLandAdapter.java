@@ -1,34 +1,28 @@
 package com.example.myapplication.Adapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.ChangeLandActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.entity.land;
-import com.hb.dialog.myDialog.MyAlertDialog;
+import com.example.myapplication.entity.lease;
+
 public class MyLandAdapter extends RecyclerView.Adapter<MyLandAdapter.MyViewHolder> {
 
     private LayoutInflater mLayoutInflater;
-    private List<land> landList;
+    private List<lease> landList;
 
     private User2LandAdapter.OnItemClickListener mOnItemClickListener;
 
-    public MyLandAdapter(List<land> landList) {
+    public MyLandAdapter(List<lease> landList) {
         this.landList = landList;
     }
     @NonNull
@@ -42,10 +36,9 @@ public class MyLandAdapter extends RecyclerView.Adapter<MyLandAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int i) {
-        land land = landList.get(i);
-        myViewHolder.Land_Pic.setImageURI(land.getphotoUrl());
+        lease land = landList.get(i);
+        myViewHolder.Land_Pic.setImageBitmap(land.getphotoUrl());
         myViewHolder.Land_Name.setText(land.getlocation());
-        myViewHolder.Land_Detail.setText(land.getbrief());
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -2,46 +2,81 @@ package com.example.myapplication.entity;
 
 public class address
 {
-    private String mName;
-    private String mPhone;
-    private String mAddress;
+    private int addressId;
+    private String userId;
+    private String name;
+    private String phone;
+    private String detail;
+    private String postcode;
 
-    public address(String mName,String mPhone,String mAddress)
+    public address(int addressId,String userId,String name,String phone,String detail,String postcode)
     {
-        this.mName=mName;
-        this.mPhone=mPhone;
-        this.mAddress=mAddress;
+        this.addressId=addressId;
+        this.userId=userId;
+        this.name=name;
+        this.phone=phone;
+        this.detail=detail;
+        this.postcode=postcode;
+    }
+
+    public String getUserId()
+    {
+        return userId;
+    }
+
+    public void setUserId(String userId)
+    {
+        this.userId = userId;
+    }
+
+    public int getAddressId()
+    {
+        return addressId;
+    }
+
+    public void setAddressId(int addressId)
+    {
+        this.addressId = addressId;
     }
 
     public String getName()
     {
-        return mName;
+        return name;
     }
 
-    public void setName(String mName)
+    public void setName(String name)
     {
-        this.mName = mName;
+        this.name = name;
     }
 
     public String getPhone()
     {
-        return mPhone;
+        return phone;
     }
 
-    public void setPhone(String mPhone)
+    public void setPhone(String phone)
     {
-        this.mPhone = mPhone;
+        this.phone = phone;
     }
 
-    public String getAddress()
+    public String getDetail()
     {
-        return mAddress;
+        return detail;
     }
 
-    public void setAddress(String mAddress)
+    public void setDetail(String detail)
     {
-        this.mAddress = mAddress;
+        this.detail = detail;
     }
 
+    public String getPostcode()
+    {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode)
+    {
+        this.postcode = postcode;
+    }
 }
 

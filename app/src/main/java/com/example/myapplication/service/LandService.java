@@ -1,6 +1,9 @@
 package com.example.myapplication.service;
 
+import com.example.myapplication.entity.LandPostdata;
 import com.example.myapplication.entity.land;
+import com.example.myapplication.entity.landData;
+import com.example.myapplication.entity.landInfoData;
 import com.example.myapplication.entity.landlist;
 
 import okhttp3.RequestBody;
@@ -25,19 +28,37 @@ public interface LandService {
 
     //获取土地详情
     @GET("getLandInfo")
-    Call<landlist> getItem(@Query("landId") int landId);
+    Call<landData> getItem(@Query("landId") int landId);
 
     //取消发布土地
     @PUT("cancelLand/{landId}")
-    Call<landlist> putInfo(@Field("landId") int landId);
+    Call<landlist> putInfo(@Path("landId") int landId);
 
     //发布土地
     @POST("addLand")
     @FormUrlEncoded
-    Call<land> postResult(
+    Call<LandPostdata> postResult(
             @Field("uid") String uid,
             @Field("location") String location,
             @Field("rent") double rent,
             @Field("brief") String brief,
             @Field("area") double area);
+
+    @POST("uploadLandImg")
+    @FormUrlEncoded
+    Call<LandPostdata> imgResult(
+            @Field("img") String img,
+            @Field("landId") int landId);
+
+    @GET("getFarmInfo")
+    Call<landInfoData> getInfo(@Query("landId") int landId);
+
+    @PUT("updateFarmInfo")
+    @FormUrlEncoded
+    Call<landInfoData> updateInfo(
+            @Field("landId") int landId,
+            @Field("temperature") int temperature,
+            @Field("humidity") int humidity,
+            @Field("light") int light,
+            @Field("weather") int weather);
 }

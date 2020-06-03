@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -15,18 +16,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.entity.User;
+import com.example.myapplication.entity.UserData;
+import com.example.myapplication.entity.land;
+import com.example.myapplication.entity.landlist;
+import com.example.myapplication.service.LandService;
+import com.example.myapplication.service.UserService;
 import com.example.myapplication.tools.DBOpenHelper;
 import com.example.myapplication.tools.MD5Utils;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText phoneEditText;
     private EditText passwordEditText;
-    private String spPsw;//加密密码
-    private User tempUser;
-    private DBOpenHelper mDBOpenHelper;
+    private String userId;
+    private User.Id id;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         phoneEditText = findViewById(R.id.phone_num);
         passwordEditText = findViewById(R.id.password);
         final TextView signupText = findViewById(R.id.signup);
+        final TextView adminText = findViewById(R.id.admin);
         final Button loginButton = findViewById(R.id.login);
         signupText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,15 +65,19 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+        adminText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, AdminLoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phone = phoneEditText.getText().toString().trim();
+                final String phone = phoneEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
-                String md5Psw= MD5Utils.md5(password);
-                // md5Psw ; spPsw 为 根据从SharedPreferences中用户名读取密码
-                // 定义方法 readPsw为了读取用户名，得到密码
-                spPsw=readPsw(phone);
                 if(TextUtils.isEmpty(phone)){
                     Toast.makeText(LoginActivity.this, "请输入用户名", Toast.LENGTH_SHORT).show();
                     return;
@@ -68,89 +85,72 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
                     return;
                     // md5Psw.equals(); 判断，输入的密码加密后，是否与保存在SharedPreferences中一致
-                }else if(md5Psw.equals(spPsw)){
-                    ArrayList<User> persons = mDBOpenHelper.getAllData();
-                    for(User ps:persons){
-                        tempUser=ps;
-                        break;
-                    }
-                    if(1==tempUser.getId()){
-                        Toast.makeText(LoginActivity.this, "农场主登录成功", Toast.LENGTH_SHORT).show();
-                        saveLoginStatus(true, phone);
-                        //登录成功后关闭此页面进入主页
-                        Intent data=new Intent();
-                        //datad.putExtra( ); name , value ;
-                        data.putExtra("isLogin",true);
-                        //RESULT_OK为Activity系统常量，状态码为-1
-                        // 表示此页面下的内容操作成功将data返回到上一页面，如果是用back返回过去的则不存在用setResult传递data值
-                        setResult(RESULT_OK,data);
-                        //销毁登录界面
-                        LoginActivity.this.finish();
-                        //跳转到主界面，登录成功的状态传递到 MainActivity 中
-                        startActivity(new Intent(LoginActivity.this, User1MainActivity.class));
-                        //根据权限的不同跳传到不同的模块（页面）
-                    } else if(2==tempUser.getId()){
-                        Toast.makeText(LoginActivity.this, "租用土地会员登录成功", Toast.LENGTH_SHORT).show();
-                        saveLoginStatus(true, phone);
-                        //登录成功后关闭此页面进入主页
-                        Intent data=new Intent();
-                        //datad.putExtra( ); name , value ;
-                        data.putExtra("isLogin",true);
-                        //RESULT_OK为Activity系统常量，状态码为-1
-                        // 表示此页面下的内容操作成功将data返回到上一页面，如果是用back返回过去的则不存在用setResult传递data值
-                        setResult(RESULT_OK,data);
-                        //销毁登录界面
-                        LoginActivity.this.finish();
-                        //跳转到主界面，登录成功的状态传递到 MainActivity 中
-                        startActivity(new Intent(LoginActivity.this, User2MainActivity.class));
-                        //根据权限的不同跳传到不同的模块（页面）
-                    }else if(3==tempUser.getId()){
-                        Toast.makeText(LoginActivity.this, "农产品买家登录成功", Toast.LENGTH_SHORT).show();
-                        saveLoginStatus(true, phone);
-                        //登录成功后关闭此页面进入主页
-                        Intent data=new Intent();
-                        //datad.putExtra( ); name , value ;
-                        data.putExtra("isLogin",true);
-                        //RESULT_OK为Activity系统常量，状态码为-1
-                        // 表示此页面下的内容操作成功将data返回到上一页面，如果是用back返回过去的则不存在用setResult传递data值
-                        setResult(RESULT_OK,data);
-                        //销毁登录界面
-                        LoginActivity.this.finish();
-                        //跳转到主界面，登录成功的状态传递到 MainActivity 中
-                        startActivity(new Intent(LoginActivity.this, User3MainActivity.class));
-                        //根据权限的不同跳传到不同的模块（页面）
-                    }
+                }else {
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://47.102.99.47:8888/") // 设置 网络请求 Url
+                            .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
+                            .build();
+                    UserService request = retrofit.create(UserService.class);
+                    Call<UserData> call = request.getUser(phone,password);
+                    call.enqueue(new Callback<UserData>() {
+                        @Override
+                        public void onResponse(Call<UserData> call, Response<UserData> response) {
+                            System.out.println("连接成功");
+                            if(response.body().getStatus()==1){
+                                User user=response.body().getData();
+                                userId=user.getPhone();
+                                id=user.getId();
+                                Intent data=new Intent();
+                                if(id== User.Id.land_owner){
+                                    Toast.makeText(LoginActivity.this, "农场主登录成功", Toast.LENGTH_SHORT).show();
+                                    data.setClass(LoginActivity.this, User1MainActivity.class);
+                                    data.putExtra("userId", phone);
+                                    System.out.println(phone);
+                                    setResult(RESULT_OK,data);
+                                    saveLoginStatus(true,phone);
+                                    LoginActivity.this.finish();
+                                    startActivity(data);
+                                } else if(id== User.Id.land_tenant){
+                                    Toast.makeText(LoginActivity.this, "租用土地会员登录成功", Toast.LENGTH_SHORT).show();
+                                    data.setClass(LoginActivity.this, User2MainActivity.class);
+                                    data.putExtra("userId", phone);
+                                    setResult(RESULT_OK,data);
+                                    saveLoginStatus(true,phone);
+                                    LoginActivity.this.finish();
+                                    startActivity(data);
+                                }else if(id== User.Id.consumer){
+                                    Toast.makeText(LoginActivity.this, "农产品买家登录成功", Toast.LENGTH_SHORT).show();
+                                    data.setClass(LoginActivity.this, User3MainActivity.class);
+                                    data.putExtra("userId", phone);
+                                    setResult(RESULT_OK,data);
+                                    saveLoginStatus(true,phone);
+                                    LoginActivity.this.finish();
+                                    startActivity(data);
+                                }
+                            }else{
+                                Toast.makeText(LoginActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<UserData> call, Throwable throwable) {
+                            System.out.println("连接失败");
+                            System.out.println(throwable.getMessage());
+                        }
+                    });
                     return;
-                }else if((spPsw!=null&&!TextUtils.isEmpty(spPsw)&&!md5Psw.equals(spPsw))){
-                    Toast.makeText(LoginActivity.this, "输入的用户名和密码不一致", Toast.LENGTH_SHORT).show();
-                    return;
-                }else{
-                    Toast.makeText(LoginActivity.this, "此用户名不存在", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-    }
-
-    private String readPsw(String phone){
-        //getSharedPreferences("loginInfo",MODE_PRIVATE);
-        //"loginInfo",mode_private; MODE_PRIVATE表示可以继续写入
-        SharedPreferences sp=getSharedPreferences("loginInfo", MODE_PRIVATE);
-        //sp.getString() userName, "";
-        return sp.getString(phone , "");
     }
 
     private void saveLoginStatus(boolean status,String phone){
         //saveLoginStatus(true, userName);
         //loginInfo表示文件名  SharedPreferences sp=getSharedPreferences("loginInfo", MODE_PRIVATE);
         SharedPreferences sp=getSharedPreferences("loginInfo", MODE_PRIVATE);
-        //获取编辑器
         SharedPreferences.Editor editor=sp.edit();
-        //存入boolean类型的登录状态
         editor.putBoolean("isLogin", status);
-        //存入登录状态时的用户名
         editor.putString("loginUserName", phone);
-        //提交修改
-        editor.commit();
+        editor.apply();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

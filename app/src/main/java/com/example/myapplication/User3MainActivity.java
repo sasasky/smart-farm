@@ -40,6 +40,7 @@ public class User3MainActivity extends FragmentActivity implements View.OnClickL
     private CartFragment fg2;
     private User2MyFragment fg3;
     private FragmentManager fragmentManager;
+    private String userId;
     private void initView(){
         bottom_bar_text_1=findViewById(R.id.bottom_bar_text_1);
         bottom_bar_text_2=findViewById(R.id.bottom_bar_text_2);
@@ -56,17 +57,20 @@ public class User3MainActivity extends FragmentActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent i = getIntent();
+        userId = i.getStringExtra("userId");
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_user3_main);
         fragmentManager = getSupportFragmentManager();
         initView();
         Typeface font = Typeface.createFromAsset(getAssets(), "iconfont.ttf");
-        TextView search =findViewById(R.id.button_search);
-        search.setTypeface(font);
-        search.setOnClickListener(new View.OnClickListener() {
+        TextView setting =findViewById(R.id.button_setting);
+        setting.setTypeface(font);
+        setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it=new Intent(User3MainActivity.this, SearchActivity.class);//启动MainActivity
+                Intent it=new Intent(User3MainActivity.this, SettingActivity.class);//启动MainActivity
+                it.putExtra("userId",userId);
                 startActivity(it);
             }
         });
@@ -96,6 +100,9 @@ public class User3MainActivity extends FragmentActivity implements View.OnClickL
                 tv_main_title.setText("商城");
                 if (fg1 == null) {
                     fg1 = new User2MainFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("userId",userId);
+                    fg1.setArguments(bundle);
                     fragmentTransaction.add(R.id.content, fg1);
                 } else {
                     fragmentTransaction.show(fg1);
@@ -115,6 +122,9 @@ public class User3MainActivity extends FragmentActivity implements View.OnClickL
                 tv_main_title.setText("我的购物车");
                 if (fg2 == null) {
                     fg2 = new CartFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("userId",userId);
+                    fg2.setArguments(bundle);
                     fragmentTransaction.add(R.id.content, fg2);
                 } else {
                     fragmentTransaction.show(fg2);
@@ -134,6 +144,9 @@ public class User3MainActivity extends FragmentActivity implements View.OnClickL
                 tv_main_title.setText("我的");
                 if (fg3 == null) {
                     fg3 = new User2MyFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("userId",userId);
+                    fg3.setArguments(bundle);
                     fragmentTransaction.add(R.id.content, fg3);
                 } else {
                     fragmentTransaction.show(fg3);

@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -14,12 +16,21 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.entity.User;
+import com.example.myapplication.entity.UserData;
+import com.example.myapplication.service.UserService;
 import com.example.myapplication.tools.DBOpenHelper;
 import com.example.myapplication.tools.MD5Utils;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class SignUpActivity extends AppCompatActivity{
     private DBOpenHelper mDBOpenHelper;
-    private int id=0;
+    private User.Id id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +63,13 @@ public class SignUpActivity extends AppCompatActivity{
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (user1.getId() == checkedId) {
-                    id=1;
+                    id= User.Id.land_owner;
                 }
                 if (user2.getId() == checkedId) {
-                    id=2;
+                    id= User.Id.land_tenant;
                 }
                 if (user3.getId() == checkedId) {
-                    id=3;
+                    id= User.Id.consumer;
                 }
             }
         });
@@ -83,33 +94,51 @@ public class SignUpActivity extends AppCompatActivity{
                     Toast.makeText(SignUpActivity.this, "请再次输入密码", Toast.LENGTH_SHORT).show();
                 }else if(!password1.equals(password2)){
                     Toast.makeText(SignUpActivity.this, "两次输入密码不一致", Toast.LENGTH_SHORT).show();
-                }else if(isExistPhone(phone)){
-                    Toast.makeText(SignUpActivity.this, "该手机号已经注册", Toast.LENGTH_SHORT).show();
-                }else if(id==0){
-                    Toast.makeText(SignUpActivity.this, "请选择注册身份", Toast.LENGTH_SHORT).show();
                 }else {
                     //将用户名和密码加入到数据库中
-                    mDBOpenHelper.add(username, phone, password1, id);
-                    saveRegisterInfo(phone, password1);
-                    //注册成功后把账号传递到LoginActivity.java中
-                    // 返回值到loginActivity显示
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://47.102.99.47:8888/") // 设置 网络请求 Url
+                            .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
+                            .build();
+                    UserService request = retrofit.create(UserService.class);
+                    Call<UserData> call = request.postResult(phone,password1,id);
+                    call.enqueue(new Callback<UserData>() {
+                        @Override
+                        public void onResponse(Call<UserData> call, Response<UserData> response) {
+                            if(response.body().getStatus()==1){
+                                Toast.makeText(SignUpActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                                SharedPreferences sharedPreferences=getSharedPreferences("config", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor=sharedPreferences.edit();
+                                editor.putBoolean("isLogin", true);
+                                editor.putString("loginUserName",response.body().getData().getPhone());
+                                editor.apply();
+                            }else{
+                                Toast.makeText(SignUpActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<UserData> call, Throwable throwable) {
+                            System.out.println("连接失败");
+                            System.out.println(throwable.getMessage());
+                        }
+                    });
                     Intent data = new Intent();
                     data.putExtra("phone", phone);
                     setResult(RESULT_OK, data);
                     switch (id){
-                        case 1:
+                        case land_owner:
                             Toast.makeText(SignUpActivity.this, "农场主身份注册成功", Toast.LENGTH_SHORT).show();
                             Intent intent1 = new Intent(SignUpActivity.this, User1MainActivity.class);
                             startActivity(intent1);
                             finish();
                             break;
-                        case 2:
+                        case land_tenant:
                             Toast.makeText(SignUpActivity.this, "租用土地会员身份注册成功", Toast.LENGTH_SHORT).show();
                             Intent intent2 = new Intent(SignUpActivity.this, User2MainActivity.class);
                             startActivity(intent2);
                             finish();
                             break;
-                        case 3:
+                        case consumer:
                             Toast.makeText(SignUpActivity.this, "农产品买家身份注册成功", Toast.LENGTH_SHORT).show();
                             Intent intent3 = new Intent(SignUpActivity.this, User3MainActivity.class);
                             startActivity(intent3);
@@ -119,6 +148,15 @@ public class SignUpActivity extends AppCompatActivity{
                 }
             }
         });
+    }
+    private void saveLoginStatus(boolean status,String phone){
+        //saveLoginStatus(true, userName);
+        //loginInfo表示文件名  SharedPreferences sp=getSharedPreferences("loginInfo", MODE_PRIVATE);
+        SharedPreferences sp=getSharedPreferences("loginInfo", MODE_PRIVATE);
+        SharedPreferences.Editor editor=sp.edit();
+        editor.putBoolean("isLogin", status);
+        editor.putString("loginUserName", phone);
+        editor.apply();
     }
 
     private boolean isExistPhone(String phone){
