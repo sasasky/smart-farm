@@ -77,7 +77,7 @@
     <string name="water">湿度</string>
     <string name="warm">温度</string>
     <string name="CO2">二氧化碳</string>
-    <string name="light">光照：</string>
+    <string name="light">光照</string>
     <string name="fertilizer">施肥</string>
     <string name="pest">虫害防治</string>
     <string name="ill">病害防治：</string>

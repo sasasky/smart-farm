@@ -39,7 +39,7 @@
     </RelativeLayout>
 
     <Switch
-        android:id="@+id/water"
+        android:id="@+id/humidity1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -59,7 +59,7 @@
         android:layout_marginTop="10dp" />
 
     <Switch
-        android:id="@+id/light"
+        android:id="@+id/light1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"

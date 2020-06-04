@@ -14,12 +14,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.entity.land;
 import com.example.myapplication.entity.landInfoData;
-import com.example.myapplication.entity.landlist;
 import com.example.myapplication.service.LandService;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,9 +70,9 @@ public class PlanActivity extends AppCompatActivity {
                 builder.show();
             }
         });
-        Switch water = findViewById(R.id.water);
+        Switch water = findViewById(R.id.humidity1);
         Switch CO2 = findViewById(R.id.CO2);
-        Switch light = findViewById(R.id.light);
+        Switch light = findViewById(R.id.light1);
         light.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
