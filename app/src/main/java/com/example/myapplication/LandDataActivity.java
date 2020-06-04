@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.myapplication.entity.land;
@@ -44,14 +45,11 @@ public class LandDataActivity extends AppCompatActivity {
     private TextView Land_Name;
     private TextView Land_Locate;
     private ImageView Land_Pic;
-    private int temperature;
-    private int humidity;
-    private int Light;
-    private int weather;
 
-    private TextView textTemp1, textHumi1, textLight1, textWater;
+    private TextView textTemp1, textHumi1, textLight1;
     static TextView textTips;
-    private Button btnNetwork, btnWater;
+    private Button btnNetwork;
+    private Switch Water, CO2, Light;
 
     //消息定义
     static final int RX_DATA_UPDATE_UI = 1;
@@ -87,8 +85,7 @@ public class LandDataActivity extends AppCompatActivity {
             LandInfo[i].addr=0;
             LandInfo[i].LampState=false;
         }
-
-        //initControl();
+        
         initMainHandler();
 
         Intent i = getIntent();
@@ -118,9 +115,12 @@ public class LandDataActivity extends AppCompatActivity {
         textTips = findViewById(R.id.Tips);
         btnNetwork = findViewById(R.id.btn_network);
         btnNetwork.setOnClickListener(new ButtonClick());
-/*        final TextView water =findViewById(R.id.water);
-        final TextView warm =findViewById(R.id.warm);
-        final TextView light =findViewById(R.id.light);*/
+        Water = findViewById(R.id.watering);
+        Water.setOnClickListener(new ButtonClick());
+        CO2 = findViewById(R.id.co2);
+        CO2.setOnClickListener(new ButtonClick());
+        Light = findViewById(R.id.lighting);
+        Light.setOnClickListener(new ButtonClick());
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://47.102.99.47:8888/") // 设置 网络请求 Url
@@ -142,19 +142,6 @@ public class LandDataActivity extends AppCompatActivity {
                 System.out.println(throwable.getMessage());
             }
         });
-/*
-        setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it=new Intent(LandDataActivity.this, PlanActivity.class);//启动MainActivity
-                it.putExtra("landId",landId);
-                it.putExtra("humidity",humidity);
-                it.putExtra("temperature",temperature);
-                it.putExtra("Light",Light);
-                it.putExtra("weather",weather);
-                startActivity(it);
-            }
-        });*/
     }
 
     class ButtonClick implements View.OnClickListener {
@@ -170,11 +157,11 @@ public class LandDataActivity extends AppCompatActivity {
                 case R.id.btn_network: //连接网络
                     connect();
                     break;
-                /*case R.id.watering: //开关终端1的灯
+                case R.id.watering:    //开关灌溉
                     MainMsg = mainHandler.obtainMessage(TX_DATA_UPDATE_UI,
                             WRITE_LAMP, 1);
                     mainHandler.sendMessage(MainMsg);
-                    break;*/
+                    break;
                 default:
                     break;
             }
@@ -196,21 +183,19 @@ public class LandDataActivity extends AppCompatActivity {
                         textHumi1.setText(strHumi);
                         strLight = LandInfo[0].Light + "%";
                         textLight1.setText(strLight);
-/*
+
                         if (LandInfo[0].LampState)                           //低电平亮，高电平灭
                         {
-                            textWater.setText("灌溉状态：开启中"); //灯亮
-                            btnWater.setText("关闭灌溉");
+                            Water.setText("灌溉状态：开启中");     //灯亮
                         }
                         else{
-                            textWater.setText("灌溉状态：关闭中"); //灯灭
-                            btnWater.setText("开启灌溉");
-                        }*/
+                            Water.setText("灌溉状态：关闭中");     //灯灭
+                        }
                         break;
 
                     case TX_DATA_UPDATE_UI: //msg.arg1保存功能码 arg2保存终端地址
                         switch (msg.arg1) {
-                            case READ_ALL_INFO://读取所有终端的数据
+                            case READ_ALL_INFO:      //读取所有终端的数据
                                 SendBuf[0]=0x3A;
                                 SendBuf[1] = 0x01;           //FC
                                 SendBuf[2] = (byte) msg.arg2;//0xFF;
@@ -218,7 +203,7 @@ public class LandDataActivity extends AppCompatActivity {
                                 SendData(SendBuf, 4); //查询所有终端
                                 break;
 
-                            case WRITE_LAMP:
+                            case WRITE_LAMP:          //开关灯
                                 SendBuf[0]=0x3A;
                                 SendBuf[1] = 0x02;  //FC
                                 SendBuf[2] = (byte) msg.arg2; //终端编号
@@ -295,29 +280,5 @@ public class LandDataActivity extends AppCompatActivity {
                 len, 0, (Object) buffer);
         ClientThread.childHandler.sendMessage(MainMsg);
     }
-
-
-/*
-    void initControl() {
-        textTemp1 = (TextView) findViewById(R.id.temperature1);
-        textTemp1.setText("0");
-        textHumi1 = (TextView) findViewById(R.id.humidity1);
-        textHumi1.setText("0");
-        //textLight1 = (TextView) findViewById(R.id.light1);
-        //textLight1.setText("0");
-
-
-        textTips = (TextView) findViewById(R.id.Tips);
-        textTips.setText("000");
-        btnNetwork = (Button) findViewById(R.id.btn_network);
-        btnNetwork.setOnClickListener(new ButtonClick());
-
-        textWater = (TextView) findViewById(R.id.Water);
-        textWater.setText("灌溉状态：关闭中");
-        btnWater = (Button) findViewById(R.id.watering);
-        btnWater.setOnClickListener(new ButtonClick());
-    }*/
-
-
 
 }
