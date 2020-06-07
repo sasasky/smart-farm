@@ -36,6 +36,22 @@
             android:text="@string/title_setting"
             android:textColor="#ffffffff"
             android:textSize="20dp" />
+        
+        <TextView
+            android:id="@+id/button_off"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:drawablePadding="9dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:singleLine="true"
+            android:text="@string/logoff"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:visibility="visible"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
     <LinearLayout
