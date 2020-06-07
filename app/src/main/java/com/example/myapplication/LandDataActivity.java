@@ -85,7 +85,7 @@ public class LandDataActivity extends AppCompatActivity {
             LandInfo[i].addr=0;
             LandInfo[i].LampState=false;
         }
-        
+
         initMainHandler();
 
         Intent i = getIntent();
@@ -159,7 +159,8 @@ public class LandDataActivity extends AppCompatActivity {
                     break;
                 case R.id.watering:    //开关灌溉
                     MainMsg = mainHandler.obtainMessage(TX_DATA_UPDATE_UI,
-                            WRITE_LAMP, 1);
+                            WRITE_LAMP, (landId+1)%2+1);
+                    System.out.println((landId+1)%2+1);
                     mainHandler.sendMessage(MainMsg);
                     break;
                 default:
@@ -177,14 +178,14 @@ public class LandDataActivity extends AppCompatActivity {
                     case RX_DATA_UPDATE_UI:
                         System.out.println("RX_DATA_UPDATE_UI");
                         //终端1
-                        strTemp = LandInfo[0].Temperature + "℃";
+                        strTemp = LandInfo[(landId+1)%2].Temperature + "℃";
                         textTemp1.setText(strTemp);
-                        strHumi = LandInfo[0].Humidity + "%";
+                        strHumi = LandInfo[(landId+1)%2].Humidity + "%";
                         textHumi1.setText(strHumi);
-                        strLight = LandInfo[0].Light + "%";
+                        strLight = LandInfo[(landId+1)%2].Light + "%";
                         textLight1.setText(strLight);
 
-                        if (LandInfo[0].LampState)                           //低电平亮，高电平灭
+                        if (LandInfo[(landId+1)%2].LampState)                           //低电平亮，高电平灭
                         {
                             Water.setText("灌溉状态：开启中");     //灯亮
                         }
@@ -193,7 +194,7 @@ public class LandDataActivity extends AppCompatActivity {
                         }
                         break;
 
-                    case TX_DATA_UPDATE_UI: //msg.arg1保存功能码 arg2保存终端地址
+                    case TX_DATA_UPDATE_UI:          //msg.arg1保存功能码 arg2保存终端地址
                         switch (msg.arg1) {
                             case READ_ALL_INFO:      //读取所有终端的数据
                                 SendBuf[0]=0x3A;
@@ -212,9 +213,10 @@ public class LandDataActivity extends AppCompatActivity {
                                 } else {
                                     SendBuf[3] = 0x01;
                                 }
-
                                 SendData(SendBuf, 4); //发命令控制灯命令
                                 break;
+
+
                             case WRITE_LAMP_ALL:
                                 SendBuf[0]=0x3A;
                                 SendBuf[1] = 0x02;  //FC
