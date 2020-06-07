@@ -42,8 +42,7 @@ public class MyLandActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it=new Intent(MyLandActivity.this, User1MainActivity.class);//启动MainActivity
-                startActivity(it);
+                MyLandActivity.this.finish();
             }
         });
         Land_Name =findViewById(R.id.Land_Name);
