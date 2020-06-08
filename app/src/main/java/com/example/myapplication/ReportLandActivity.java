@@ -143,6 +143,7 @@ public class ReportLandActivity extends AppCompatActivity {
                 }
                 Intent it=new Intent(ReportLandActivity.this, AdminMainActivity.class);//启动MainActivity
                 startActivity(it);
+                System.out.println(response.message()+"   "+response.body());
             }
             @Override
             public void onFailure(Call<Putdata> call, Throwable throwable) {

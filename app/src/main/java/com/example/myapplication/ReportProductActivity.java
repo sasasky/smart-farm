@@ -144,6 +144,7 @@ public class ReportProductActivity extends AppCompatActivity {
                 }
                 Intent it=new Intent(ReportProductActivity.this, AdminMainActivity.class);//启动MainActivity
                 startActivity(it);
+                System.out.println(response.message()+"   "+response.body());
             }
             @Override
             public void onFailure(Call<Putdata> call, Throwable throwable) {

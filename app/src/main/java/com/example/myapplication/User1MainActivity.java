@@ -79,24 +79,14 @@ public class User1MainActivity extends Activity {
             }
         });
         TextView setting =findViewById(R.id.button_setting);
-        TextView add =findViewById(R.id.button_add);
         Typeface font = Typeface.createFromAsset(getAssets(), "iconfont.ttf");
         setting.setTypeface(font);
-        add.setTypeface(font);
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(User1MainActivity.this, SettingActivity.class);//启动MainActivity
                 i.putExtra("userId",userId);
                 startActivity(i);
-            }
-        });
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it=new Intent(User1MainActivity.this, AddLandActivity.class);//启动MainActivity
-                it.putExtra("userId",userId);
-                startActivity(it);
             }
         });
     }
@@ -203,6 +193,27 @@ public class User1MainActivity extends Activity {
             }
             @Override
             public void onFailure(Call<landlist> call, Throwable throwable) {
+                System.out.println("连接失败");
+                System.out.println(throwable.getMessage());
+            }
+        });
+    }
+
+    public void requestTime() {
+        //步骤4:创建Retrofit对象
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://47.102.99.47:8888/") // 设置 网络请求 Url
+                .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
+                .build();
+        UpdateService request = retrofit.create(UpdateService.class);
+        Call<updateTime> call = request.getLandTime();
+        call.enqueue(new Callback<updateTime>() {
+            @Override
+            public void onResponse(Call<updateTime> call, Response<updateTime> response) {
+                Date time=response.body().getData();
+            }
+            @Override
+            public void onFailure(Call<updateTime> call, Throwable throwable) {
                 System.out.println("连接失败");
                 System.out.println(throwable.getMessage());
             }

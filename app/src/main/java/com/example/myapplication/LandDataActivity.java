@@ -43,7 +43,6 @@ public class LandDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
         landId = i.getIntExtra("landId",0);
-        System.out.println(landId);
         if(getSupportActionBar()!=null){
             getSupportActionBar().hide();
         }
