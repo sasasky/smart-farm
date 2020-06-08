@@ -12,11 +12,14 @@ import java.util.Date;
 
 public class lease {
     private int landId;
-    private String ownerId;
+    private String hirerId;
     private double area;
+    private double rent;
     private String location;
     private String photoUrl;
     private String brief;
+    private int duration;
+    private String beginTime;
     public enum lease_State {
         unpaid,paid,cancelled,overdue,expire;
     };
@@ -27,16 +30,19 @@ public class lease {
     public lease() {
     }
 
-    public lease(int landId, String ownerId, double area, String location, double rent, lease_State state, String photoUrl, String brief, Date creationTime, Date expireTime) {
+    public lease(int landId, int duration, String hirerId, double area, String location, String beginTime, double rent, lease_State state, String photoUrl, String brief, Date creationTime, Date expireTime) {
         this.landId = landId;
-        this.ownerId = ownerId;
+        this.hirerId = hirerId;
         this.area = area;
         this.location = location;
         this.state = state;
+        this.rent = rent;
         this.photoUrl = photoUrl;
         this.creationTime=creationTime;
         this.expireTime=expireTime;
         this.brief = brief;
+        this.beginTime = beginTime;
+        this.duration = duration;
     }
 
     public int getlandId() {
@@ -47,12 +53,28 @@ public class lease {
         this.landId = landId;
     }
 
-    public String getownerId() {
-        return ownerId;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setownerId(String ownerId) {
-        this.ownerId = ownerId;
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getownerId() {
+        return hirerId;
+    }
+
+    public void setownerId(String hirerId) {
+        this.hirerId = hirerId;
+    }
+
+    public String getBeginTime() {
+        return beginTime;
+    }
+
+    public void setBeginTime(String beginTime) {
+        this.beginTime = beginTime;
     }
 
     public double getarea() {
@@ -61,6 +83,14 @@ public class lease {
 
     public void setarea(double area) {
         this.area = area;
+    }
+
+    public double getRent() {
+        return rent;
+    }
+
+    public void setRent(double rent) {
+        this.rent = rent;
     }
 
     public String getlocation() {
