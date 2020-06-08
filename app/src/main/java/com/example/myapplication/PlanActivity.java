@@ -52,7 +52,8 @@ public class PlanActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlanActivity.this.finish();
+                Intent it=new Intent(PlanActivity.this, LandDataActivity.class);//启动MainActivity
+                startActivity(it);
             }
         });
         Button plan = findViewById(R.id.plan);

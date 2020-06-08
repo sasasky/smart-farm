@@ -21,8 +21,6 @@ import com.example.myapplication.entity.landData;
 import com.example.myapplication.service.GoodService;
 import com.example.myapplication.service.LeaseService;
 
-import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,13 +30,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MyGoodActivity extends AppCompatActivity {
     private int productId;
     private String price;
-    private String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
         productId = i.getIntExtra("productId",0);
-        userId = i.getStringExtra("userId");
         if(getSupportActionBar()!=null){
             getSupportActionBar().hide();
         }
@@ -113,6 +109,7 @@ public class MyGoodActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         requestSelf();
+                        MyGoodActivity.this.finish();
                     }
                 });
                 builder.setNegativeButton("否", null);
@@ -162,10 +159,6 @@ public class MyGoodActivity extends AppCompatActivity {
                 assert response.body() != null;
                 if(response.body().getStatus()==1){
                     Toast.makeText(getApplicationContext(), "运输给自己成功！", Toast.LENGTH_LONG).show();
-                    Intent it=new Intent(MyGoodActivity.this, SelectAddressActivity.class);//启动MainActivity
-                    it.putExtra("productId", productId);
-                    it.putExtra("userId",userId);
-                    startActivity(it);
                 }
                 Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_LONG).show();
             }
