@@ -33,7 +33,7 @@
             android:ellipsize="marquee"
             android:gravity="center_horizontal|center"
             android:singleLine="true"
-            android:text="@string/land_detail"
+            android:text="租用订单详情"
             android:textColor="#ffffffff"
             android:textSize="20dp" />
     </RelativeLayout>
@@ -55,91 +55,204 @@
                 android:scaleType="fitXY"
                 android:layout_height="400dp" />
 
-            <TextView
-                android:id="@+id/Land_Name"
+            <LinearLayout
+                android:id="@+id/location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textIsSelectable="true"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toTopOf="@id/Land_Pic" />
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:text="土地地址"
+                    android:textIsSelectable="true"/>
 
-            <TextView
-                android:id="@+id/Land_area"
+                <TextView
+                    android:id="@+id/Land_Location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:layout_marginStart="15dp"
+                    android:textSize="18sp"
+                    android:text="土地地址"
+                    android:textIsSelectable="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/brife"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/Land_Name"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:paddingBottom="10dp"
-                android:textIsSelectable="true"
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:text="土地简介"
+                    android:textIsSelectable="true"/>
 
-            <ImageView
+                <TextView
+                    android:id="@+id/Land_Detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:layout_marginStart="15dp"
+                    android:textSize="18sp"
+                    android:text="土地简介"
+                    android:textIsSelectable="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/area"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@color/gray"/>
-
-            <TextView
-                android:id="@+id/Land_Detail"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textIsSelectable="true"
-                android:textSize="16sp"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:text="土地面积"
+                    android:textIsSelectable="true"/>
+
+                <TextView
+                    android:id="@+id/Land_Area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:layout_marginStart="15dp"
+                    android:textSize="18sp"
+                    android:text="土地面积"
+                    android:textIsSelectable="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/begin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:text="开始日期"
+                    android:textIsSelectable="true"/>
+
+                <TextView
+                    android:id="@+id/Begin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:layout_marginStart="15dp"
+                    android:textSize="18sp"
+                    android:text="开始日期"
+                    android:textIsSelectable="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:text="租赁周期"
+                    android:textIsSelectable="true"/>
+
+                <TextView
+                    android:id="@+id/Time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:layout_marginStart="15dp"
+                    android:textSize="18sp"
+                    android:text="租赁周期"
+                    android:textIsSelectable="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:text="租赁价格"
+                    android:textIsSelectable="true"/>
+
+                <TextView
+                    android:id="@+id/Land_Price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:layout_marginStart="15dp"
+                    android:textSize="18sp"
+                    android:text="租赁价格"
+                    android:textIsSelectable="true"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="0"
         android:layout_gravity="bottom"
         android:orientation="horizontal">
-        <LinearLayout
-            android:id="@+id/Price"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/Land_Price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/price"
-                android:textColor="@color/gray"
-                android:textSize="20sp"
-                android:textIsSelectable="true"/>
-
-            <TextView
-                android:id="@+id/Land_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textIsSelectable="true"
-                android:textColor="@color/green"
-                android:textSize="20sp"
-                android:layout_marginStart="6dp"
-                app:layout_constraintStart_toStartOf="@id/Land_Price"
-                android:layout_marginLeft="6dp" />
-        </LinearLayout>
 
         <Button
             android:id="@+id/pay"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|center"
-            android:layout_marginEnd="10dp"
+            android:layout_weight="0.5"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/check"
-            android:text="@string/action_pay"
+            android:text="支付订单"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_marginRight="10dp" />
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/context"/>
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="center"
+            android:background="@drawable/check"
+            android:text="取消订单"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/context"/>
     </LinearLayout>
 </LinearLayout>
