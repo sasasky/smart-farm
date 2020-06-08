@@ -37,7 +37,6 @@ import com.example.myapplication.service.LandService;
 import com.example.myapplication.service.LeaseService;
 import com.example.myapplication.service.UserService;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,7 +58,7 @@ public class LandDetailActivity extends AppCompatActivity {
     private TextView Land_area;
     private ImageView Land_Pic;
     private Button pay;
-    private String date;
+    private Date date;
     String time;
     @SuppressLint("SetTextI18n")
     @Override
@@ -75,10 +74,8 @@ public class LandDetailActivity extends AppCompatActivity {
         TextView back =findViewById(R.id.button_backward);
         TextView report =findViewById(R.id.button_report);
         @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date today = new Date(System.currentTimeMillis());
-        date = simpleDateFormat.format(today);
-        System.out.println(date);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+        date = new Date(System.currentTimeMillis());
         pay =findViewById(R.id.pay);
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +173,7 @@ public class LandDetailActivity extends AppCompatActivity {
             public void onResponse(Call<landData> call, Response<landData> response) {
                 System.out.println("连接成功");
                 if(response.body().getStatus()==1){
-                    Toast.makeText(getApplicationContext(), "租用成功，请尽快支付！", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "租用成功！", Toast.LENGTH_LONG).show();
                 }
                 Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_LONG).show();
             }

@@ -4,7 +4,6 @@ import com.example.myapplication.entity.Putdata;
 import com.example.myapplication.entity.land;
 import com.example.myapplication.entity.landData;
 import com.example.myapplication.entity.landlist;
-import com.example.myapplication.entity.leaseData;
 import com.example.myapplication.entity.leaseList;
 
 import java.util.Date;
@@ -23,14 +22,8 @@ public interface LeaseService {
     Call<landData> postResult(
             @Field("uid") String uid,
             @Field("landId") int landId,
-            @Field("beginTime") String beginTime,
+            @Field("beginTime") Date beginTime,
             @Field("duration") int duration);
-
-    @GET("getLeasedInfo")
-    Call<leaseData> getInfo(
-            @Query("uid") String userId,
-            @Query("landId") int landId,
-            @Query("beginTime") String beginTime);
 
     //根据用户id获取租用土地
     @GET("getLeasedByUid")
@@ -40,11 +33,5 @@ public interface LeaseService {
     Call<Putdata> payLand(
             @Query("landId") int landId,
             @Query("uid") String uid,
-            @Query("beginTime") String beginTime);
-
-    @PUT("cancelLease")
-    Call<Putdata> cancelLand(
-            @Query("landId") int landId,
-            @Query("uid") String uid,
-            @Query("beginTime") String beginTime);
+            @Query("beginTime") Date beginTime);
 }
