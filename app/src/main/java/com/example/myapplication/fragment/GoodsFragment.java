@@ -70,7 +70,6 @@ public class GoodsFragment extends Fragment {
                 if(good.get(position).getGoodState()== goods.Good_State.unsold){
                     intent.setClass(context, MyGoodActivity.class);
                     intent.putExtra("productId",good.get(position).getproductId());
-                    intent.putExtra("userId",userId);
                     context.startActivity(intent);
                 }else if(good.get(position).getGoodState()== goods.Good_State.banned){
                     Toast.makeText(context, "该商品已被举报！", Toast.LENGTH_SHORT).show();
