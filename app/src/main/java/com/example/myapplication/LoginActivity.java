@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                                     data.putExtra("userId", phone);
                                     System.out.println(phone);
                                     setResult(RESULT_OK,data);
-                                    saveLoginStatus(true,phone,"land_owner");
+                                    saveLoginStatus(true,phone);
                                     LoginActivity.this.finish();
                                     startActivity(data);
                                 } else if(id== User.Id.land_tenant){
@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                                     data.setClass(LoginActivity.this, User2MainActivity.class);
                                     data.putExtra("userId", phone);
                                     setResult(RESULT_OK,data);
-                                    saveLoginStatus(true,phone,"land_tenant");
+                                    saveLoginStatus(true,phone);
                                     LoginActivity.this.finish();
                                     startActivity(data);
                                 }else if(id== User.Id.consumer){
@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                                     data.setClass(LoginActivity.this, User3MainActivity.class);
                                     data.putExtra("userId", phone);
                                     setResult(RESULT_OK,data);
-                                    saveLoginStatus(true,phone,"consumer");
+                                    saveLoginStatus(true,phone);
                                     LoginActivity.this.finish();
                                     startActivity(data);
                                 }
@@ -143,14 +143,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void saveLoginStatus(boolean status,String phone,String id){
+    private void saveLoginStatus(boolean status,String phone){
         //saveLoginStatus(true, userName);
         //loginInfo表示文件名  SharedPreferences sp=getSharedPreferences("loginInfo", MODE_PRIVATE);
         SharedPreferences sp=getSharedPreferences("loginInfo", MODE_PRIVATE);
         SharedPreferences.Editor editor=sp.edit();
         editor.putBoolean("isLogin", status);
         editor.putString("loginUserName", phone);
-        editor.putString("id", id);
         editor.apply();
     }
 

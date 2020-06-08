@@ -158,7 +158,7 @@ public class GoodsDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<goodData> call, Response<goodData> response) {
                 System.out.println("连接成功");
-                Toast.makeText(GoodsDetailActivity.this, "加入购物车成功！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GoodsDetailActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                 System.out.println(response.code());
             }
             @Override

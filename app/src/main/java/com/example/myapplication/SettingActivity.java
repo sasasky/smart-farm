@@ -72,31 +72,12 @@ public class SettingActivity extends AppCompatActivity {
             StrictMode.setVmPolicy(builder.build());
         }
         TextView back =findViewById(R.id.button_backward);
-        TextView off =findViewById(R.id.button_off);
         Typeface font = Typeface.createFromAsset(getAssets(), "iconfont.ttf");
         back.setTypeface(font);
-        off.setTypeface(font);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SettingActivity.this.finish();
-            }
-        });
-        off.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SettingActivity.this);//设置弹出框的第二种方法
-                builder.setTitle("退出登录");
-                builder.setMessage("确定退出登录吗?");
-                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {//添加"Yes"按钮
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent it = new Intent(SettingActivity.this, LoginActivity.class);//启动MainActivity
-                        startActivity(it);
-                    }
-                });
-                builder.setNegativeButton("否", null);
-                builder.show();
             }
         });
         imageView =findViewById(R.id.imageView);
@@ -181,6 +162,7 @@ public class SettingActivity extends AppCompatActivity {
                     public void onResponse(Call<UserData> call, Response<UserData> response) {
                         System.out.println("连接成功");
                         System.out.println(response.message()+"   "+response.body());
+                        Toast.makeText(SettingActivity.this, "头像修改成功", Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onFailure(Call<UserData> call, Throwable throwable) {

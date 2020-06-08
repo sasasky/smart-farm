@@ -2,14 +2,12 @@ package com.example.myapplication.Adapter;
 
 import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +34,6 @@ public class User2LandAdapter extends RecyclerView.Adapter<User2LandAdapter.MyVi
         return myViewHolder;
     }
 
-    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int i) {
         land land = landList.get(i);
@@ -51,9 +48,7 @@ public class User2LandAdapter extends RecyclerView.Adapter<User2LandAdapter.MyVi
                 }
             }
         });
-        if(land.getstate()== com.example.myapplication.entity.land.land_State.leased){
-            myViewHolder.itemView.setBackgroundResource(R.drawable.unable_card);
-        }
+
     }
 
     @Override
