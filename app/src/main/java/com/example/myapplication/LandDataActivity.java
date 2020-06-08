@@ -87,30 +87,10 @@ public class LandDataActivity extends AppCompatActivity {
             }
         });
 
-        Call<landInfoData> callInfo = request.getInfo(landId);
-        callInfo.enqueue(new Callback<landInfoData>() {
-            @Override
-            public void onResponse(Call<landInfoData> call, Response<landInfoData> response) {
-                landInfo landinfo=response.body().getData();
-                humidity=landinfo.getHumidity();
-                temperature=landinfo.getTemperature();
-                Light=landinfo.getLight();
-                weather=landinfo.getWeather();
-//                water.setText(humidity+"%");
-//                warm.setText(temperature+"℃");
-//                light.setText(Light+"");
-//                rain.setText(weather+"");
-                water.setText("65%");
-                warm.setText("26℃");
-                light.setText("70");
-                rain.setText("没有降雨");
-            }
-            @Override
-            public void onFailure(Call<landInfoData> call, Throwable throwable) {
-                System.out.println("连接失败");
-                System.out.println(throwable.getMessage());
-            }
-        });
+        water.setText("65%");
+        warm.setText("26℃");
+        light.setText("70");
+        rain.setText("没有降雨");
 
         setting.setOnClickListener(new View.OnClickListener() {
             @Override

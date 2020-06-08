@@ -72,9 +72,7 @@ public class PayLeaseActivity extends AppCompatActivity {
                 intent.setClass(PayLeaseActivity.this, PayLandActivity.class);
                 intent.putExtra("landId",landList.get(position).getlandId());
                 intent.putExtra("userId",userId);
-                Date date=landList.get(position).getCreationTime();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String dateTime = sdf.format(date);
+                String dateTime = landList.get(position).getBeginTime();
                 intent.putExtra("dateTime",dateTime);
                 PayLeaseActivity.this.startActivity(intent);
             }
