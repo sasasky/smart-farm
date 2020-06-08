@@ -1,5 +1,6 @@
 package com.example.myapplication.Adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class User2GoodAdapter extends RecyclerView.Adapter<User2GoodAdapter.MyVi
         return myViewHolder;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final User2GoodAdapter.MyViewHolder myViewHolder, final int i) {
         goods good = goodsList.get(i);
@@ -54,6 +56,9 @@ public class User2GoodAdapter extends RecyclerView.Adapter<User2GoodAdapter.MyVi
                 return false;
             }
         });
+        if(good.getGoodState()== goods.Good_State.sold_out){
+            myViewHolder.itemView.setBackgroundResource(R.drawable.unable_card);
+        }
     }
 
     @Override
